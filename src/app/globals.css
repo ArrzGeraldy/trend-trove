@@ -2,32 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 4;
+  --_g: no-repeat
+    radial-gradient(circle closest-side, #fff 90%, rgba(227, 227, 227, 0.067));
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 100%;
+  animation: l7 1s infinite linear;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.loader-black {
+  width: 30px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 100%;
+  animation: l7 1s infinite linear;
+}
+@keyframes l7 {
+  33% {
+    background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
+  }
+  50% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
+  }
+  66% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.custom-loader {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #333);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 1s infinite linear;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.corousel-1 {
+  background-image: url("../../public/assets/images/coroulsel/corousel-1.jpg");
+}
+.corousel-2 {
+  background-image: url("../../public/assets/images/coroulsel/img-3.jpg");
+}
+.corousel-3 {
+  background-image: url("../../public/assets/images/coroulsel/img-5.jpg");
+}
+
+#menu-toggle:checked + #menu {
+  display: block;
+}
+
+.hover\:grow {
+  transition: all 0.3s;
+  transform: scale(1);
+}
+
+.hover\:grow:hover {
+  transform: scale(1.02);
+}
+
+.carousel-open:checked + .carousel-item {
+  position: static;
+  opacity: 100;
+}
+
+.carousel-item {
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+
+#carousel-1:checked ~ .control-1,
+#carousel-2:checked ~ .control-2,
+#carousel-3:checked ~ .control-3 {
+  display: block;
+}
+
+.carousel-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+#carousel-1:checked
+  ~ .control-1
+  ~ .carousel-indicators
+  li:nth-child(1)
+  .carousel-bullet,
+#carousel-2:checked
+  ~ .control-2
+  ~ .carousel-indicators
+  li:nth-child(2)
+  .carousel-bullet,
+#carousel-3:checked
+  ~ .control-3
+  ~ .carousel-indicators
+  li:nth-child(3)
+  .carousel-bullet {
+  color: #000;
+  /*Set to match the Tailwind colour you want the active one to be */
+}
+
+.arrow {
+  transition: ease 0.3s;
+}
+.shop-now:hover .arrow {
+  transform: translateX(4px);
 }
